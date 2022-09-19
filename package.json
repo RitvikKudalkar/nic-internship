@@ -9,10 +9,16 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-navigation/native": "^6.0.12",
+    "@react-navigation/stack": "^6.2.3",
     "expo": "~46.0.9",
     "expo-status-bar": "~1.4.0",
     "react": "18.0.0",
-    "react-native": "0.69.5"
+    "react-native": "0.69.5",
+    "react-native-elements": "^3.4.2",
+    "react-native-textinput-effects": "^0.6.3",
+    "react-native-vector-icons": "^9.2.0",
+    "react-native-web": "^0.18.9"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
