@@ -22,7 +22,11 @@ export default function App() {
           component={Register}
           options={{ headerShown: false }}
         ></Stack.Screen>
-        <Stack.Screen name="Quiz" component={Quiz}></Stack.Screen>
+        <Stack.Screen
+          name="Quiz"
+          component={Quiz}
+          options={{ headerShown: false }}
+        ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
