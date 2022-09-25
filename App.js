@@ -5,6 +5,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import Login from "./screens/Login";
 import Register from "./screens/Register";
 import Quiz from "./screens/Quiz";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect, useCallback } from "react";
 
 const Stack = createStackNavigator();
 

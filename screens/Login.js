@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import { Input, Image, Button, Icon } from "react-native-elements";
 import { Fumi } from "react-native-textinput-effects";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -23,23 +24,37 @@ const Login = ({ navigation }) => {
 
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
-      <ImageBackground
-        source={require("../images/gradient.jpg")}
-        style={{
-          height: Dimensions.get("window").height / 1.9,
-        }}
-      >
+      <View style={{ padding: 200, backgroundColor: "#AEBDCA" }}>
         <View style={styles.brandView}>
-          <Image
-            source={{
-              uri: "https://static.javatpoint.com/fullformpages/images/nic.png",
+          <Text
+            style={{
+              fontSize: 30,
+              color: "white",
             }}
-            style={{ width: 120, height: 50 }}
-          />
+          ></Text>
         </View>
-      </ImageBackground>
+      </View>
       <View style={styles.bottomView}>
-        <View style={{ padding: 30 }}></View>
+        <View style={{ padding: 0 }}>
+          <Text
+            style={{
+              fontSize: 28,
+              marginLeft: 65,
+              marginTop: 40,
+              fontWeight: "600",
+            }}
+          >
+            Welcome Back
+          </Text>
+          <Text
+            style={{
+              marginLeft: 65,
+              marginTop: 5,
+            }}
+          >
+            Good to see you back!
+          </Text>
+        </View>
       </View>
       <View
         style={{
@@ -54,7 +69,7 @@ const Login = ({ navigation }) => {
             label={"Email"}
             iconClass={FontAwesomeIcon}
             iconName={"envelope"}
-            iconColor={"black"}
+            iconColor={"#7895B2"}
             iconSize={20}
             iconWidth={40}
             inputPadding={16}
@@ -67,7 +82,7 @@ const Login = ({ navigation }) => {
             label={"Password"}
             iconClass={FontAwesomeIcon}
             iconName={"lock"}
-            iconColor={"black"}
+            iconColor={"#7895B2"}
             iconSize={26}
             iconWidth={40}
             inputPadding={16}
@@ -76,14 +91,31 @@ const Login = ({ navigation }) => {
             onChangeText={(text) => setPassword(text)}
           />
         </View>
-        <Button title="Login" onPress={signIn} containerStyle={styles.button} />
+        {/* <Button title="Login" onPress={signIn} containerStyle={styles.button} />
         <Button
           title="Register"
+          color="#ff5c5c"
           onPress={() => {
             navigation.navigate("Register");
           }}
           containerStyle={styles.button}
-        />
+        /> */}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate("Login");
+          }}
+        >
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate("Register");
+          }}
+        >
+          <Text style={styles.buttonText}>Register</Text>
+        </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
   );
@@ -105,8 +137,12 @@ const styles = StyleSheet.create({
     width: "70%",
   },
   button: {
+    alignItems: "center",
+    backgroundColor: "#7895B2",
+    padding: 10,
     width: "70%",
-    marginTop: 10,
+    marginTop: 20,
+    borderRadius: 6,
   },
 
   brandView: {
@@ -121,10 +157,14 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
   },
   bottomView: {
-    justifyContent: "center",
     backgroundColor: "white",
     bottom: 50,
     borderTopStartRadius: 60,
     borderTopEndRadius: 60,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 20,
+    fontWeight: "500",
   },
 });
