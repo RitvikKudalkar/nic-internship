@@ -24,7 +24,7 @@ const Login = ({ navigation }) => {
 
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
-      <View style={{ padding: 200, backgroundColor: "#AEBDCA" }}>
+      <View style={{ padding: 200, backgroundColor: "#7895B2" }}>
         <View style={styles.brandView}>
           <Text
             style={{
@@ -42,6 +42,7 @@ const Login = ({ navigation }) => {
               marginLeft: 65,
               marginTop: 40,
               fontWeight: "600",
+              color: "#7895B2",
             }}
           >
             Welcome Back
@@ -49,7 +50,7 @@ const Login = ({ navigation }) => {
           <Text
             style={{
               marginLeft: 65,
-              marginTop: 5,
+              marginTop: 3,
             }}
           >
             Good to see you back!
@@ -91,19 +92,11 @@ const Login = ({ navigation }) => {
             onChangeText={(text) => setPassword(text)}
           />
         </View>
-        {/* <Button title="Login" onPress={signIn} containerStyle={styles.button} />
-        <Button
-          title="Register"
-          color="#ff5c5c"
-          onPress={() => {
-            navigation.navigate("Register");
-          }}
-          containerStyle={styles.button}
-        /> */}
+
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate("Login");
+            navigation.navigate("Quiz");
           }}
         >
           <Text style={styles.buttonText}>Login</Text>
@@ -127,7 +120,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "white",
+    backgroundColor: "#fff",
   },
   textInput: {
     width: 10,
@@ -157,13 +150,13 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
   },
   bottomView: {
-    backgroundColor: "white",
+    backgroundColor: "#fff",
     bottom: 50,
     borderTopStartRadius: 60,
     borderTopEndRadius: 60,
   },
   buttonText: {
-    color: "white",
+    color: "#F5EFE6",
     fontSize: 20,
     fontWeight: "500",
   },
