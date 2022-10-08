@@ -1,9 +1,11 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import CountDown from "react-native-countdown-component";
 import { TouchableWithoutFeedback } from "react-native";
 import { LogBox } from "react-native";
+
+import firebase from "../firebase";
 
 const questions = [
   {
@@ -16,8 +18,7 @@ const questions = [
       "Sound horn and proceed",
       "None of above.",
     ],
-    answer:
-      "Stop the vehicle and wait till the pedestrians cross the road and then proceed",
+    answer: 1,
   },
   {
     id: 2,
@@ -29,7 +30,7 @@ const questions = [
       "Wait till the other vehicle crosses the bridge and  then proceed",
       "None of the above",
     ],
-    answer: "Wait till the other vehicle crosses the bridge and  then proceed",
+    answer: 3,
   },
   {
     id: 3,
@@ -40,7 +41,7 @@ const questions = [
       "By looking at the number plate of the vehicle.",
       "unknown",
     ],
-    answer: "By looking at the number plate of the vehicle.",
+    answer: 3,
   },
   {
     id: 4,
@@ -51,7 +52,7 @@ const questions = [
       "By looking at the number plate of the vehicle.",
       "unknown",
     ],
-    answer: "By looking at the number plate of the vehicle.",
+    answer: 3,
   },
 ];
 
@@ -61,22 +62,27 @@ const Quiz = ({ navigation }) => {
   const [btnBackground, setBtnBackgroud] = useState(undefined);
   const [wrongOption, setWrongOption] = useState(0);
   const [optionsDisabled, setOptionsDisabled] = useState(false);
+  const answerIndex = questions[counter].answer - 1;
 
   return (
     <TouchableWithoutFeedback
       onPress={() => {
         setBtnBackgroud(undefined);
+        console.log(questions[counter].options[answerIndex]);
       }}
     >
       <View style={styles.container}>
         <View style={styles.topView}>
-          <Text style={{ color: "#7895B2" }}>Question {counter + 1}/20</Text>
+          <Text style={{ color: "#7895B2", fontFamily: "Poppins-Regular" }}>
+            Question {counter + 1}/20
+          </Text>
           <Text
             style={{
-              color: "black",
+              color: "#7895B2",
               marginTop: 5,
-              fontSize: 23,
+              fontSize: 20,
               fontWeight: "500",
+              fontFamily: "Poppins-ExtraBold",
             }}
           >
             {questions[counter].question}
@@ -87,7 +93,8 @@ const Quiz = ({ navigation }) => {
             disabled={optionsDisabled}
             activeOpacity={0.6}
             onPress={() => {
-              questions[counter].options[0] === questions[counter].answer
+              questions[counter].options[0] ===
+              questions[counter].options[answerIndex]
                 ? setBtnBackgroud(1)
                 : setWrongOption(1);
               setOptionsDisabled(true);
@@ -102,20 +109,23 @@ const Quiz = ({ navigation }) => {
               {
                 backgroundColor:
                   btnBackground === 1
-                    ? "green"
+                    ? "#D3E4CD"
                     : wrongOption === 1
-                    ? "red"
-                    : "#7895B2",
+                    ? "#F96666"
+                    : "#FEF5ED",
               },
               styles.button,
+              {
+                borderColor:
+                  btnBackground === 1
+                    ? "#ADC2A9"
+                    : wrongOption === 1
+                    ? "#CD104D"
+                    : "white",
+              },
             ]}
           >
-            <Text
-              style={[
-                { color: btnBackground === 1 ? "#7895B2" : "white" },
-                styles.buttonText,
-              ]}
-            >
+            <Text style={[{ color: "black" }, styles.buttonText]}>
               {questions[counter].options[0]}
             </Text>
           </TouchableOpacity>
@@ -124,7 +134,8 @@ const Quiz = ({ navigation }) => {
             disabled={optionsDisabled}
             activeOpacity={0.6}
             onPress={() => {
-              questions[counter].options[1] === questions[counter].answer
+              questions[counter].options[1] ===
+              questions[counter].options[answerIndex]
                 ? setBtnBackgroud(2)
                 : setWrongOption(2);
               setOptionsDisabled(true);
@@ -139,20 +150,23 @@ const Quiz = ({ navigation }) => {
               {
                 backgroundColor:
                   btnBackground === 2
-                    ? "green"
+                    ? "#D3E4CD"
                     : wrongOption === 2
-                    ? "red"
-                    : "#7895B2",
+                    ? "#F96666"
+                    : "#FEF5ED",
               },
               styles.button,
+              {
+                borderColor:
+                  btnBackground === 2
+                    ? "#ADC2A9"
+                    : wrongOption === 2
+                    ? "#CD104D"
+                    : "white",
+              },
             ]}
           >
-            <Text
-              style={[
-                { color: btnBackground === 2 ? "#7895B2" : "white" },
-                styles.buttonText,
-              ]}
-            >
+            <Text style={[{ color: "black" }, styles.buttonText]}>
               {questions[counter].options[1]}
             </Text>
           </TouchableOpacity>
@@ -161,7 +175,8 @@ const Quiz = ({ navigation }) => {
             disabled={optionsDisabled}
             activeOpacity={0.6}
             onPress={() => {
-              questions[counter].options[2] === questions[counter].answer
+              questions[counter].options[2] ===
+              questions[counter].options[answerIndex]
                 ? setBtnBackgroud(3)
                 : setWrongOption(3);
               setOptionsDisabled(true);
@@ -176,20 +191,23 @@ const Quiz = ({ navigation }) => {
               {
                 backgroundColor:
                   btnBackground === 3
-                    ? "green"
+                    ? "#D3E4CD"
                     : wrongOption === 3
-                    ? "red"
-                    : "#7895B2",
+                    ? "#F96666"
+                    : "#FEF5ED",
               },
               styles.button,
+              {
+                borderColor:
+                  btnBackground === 3
+                    ? "#ADC2A9"
+                    : wrongOption === 3
+                    ? "#CD104D"
+                    : "white",
+              },
             ]}
           >
-            <Text
-              style={[
-                { color: btnBackground === 3 ? "#7895B2" : "white" },
-                styles.buttonText,
-              ]}
-            >
+            <Text style={[{ color: "black" }, styles.buttonText]}>
               {questions[counter].options[2]}
             </Text>
           </TouchableOpacity>
@@ -198,7 +216,8 @@ const Quiz = ({ navigation }) => {
             disabled={optionsDisabled}
             activeOpacity={0.6}
             onPress={() => {
-              questions[counter].options[3] === questions[counter].answer
+              questions[counter].options[3] ===
+              questions[counter].options[answerIndex]
                 ? setBtnBackgroud(4)
                 : setWrongOption(4);
               setOptionsDisabled(true);
@@ -213,54 +232,26 @@ const Quiz = ({ navigation }) => {
               {
                 backgroundColor:
                   btnBackground === 4
-                    ? "green"
+                    ? "#D3E4CD"
                     : wrongOption === 4
-                    ? "red"
-                    : "#7895B2",
+                    ? "#EE6983"
+                    : "#F5EFE6",
               },
               styles.button,
+              {
+                borderColor:
+                  btnBackground === 4
+                    ? "#ADC2A9"
+                    : wrongOption === 4
+                    ? "#CD104D"
+                    : "white",
+              },
             ]}
           >
-            <Text
-              style={[
-                { color: btnBackground === 4 ? "#7895B2" : "white" },
-                styles.buttonText,
-              ]}
-            >
+            <Text style={[{ color: "black" }, styles.buttonText]}>
               {questions[counter].options[3]}
             </Text>
           </TouchableOpacity>
-
-          {/* <View>
-            <TouchableOpacity
-              activeOpacity={0.6}
-              style={{
-                width: 100,
-                backgroundColor: "#F5EFE6",
-                borderWidth: 0.6,
-                borderColor: "white",
-                paddingVertical: 8,
-                alignItems: "center",
-                borderRadius: 5,
-                position: "absolute",
-                top: 10,
-                right: 0,
-              }}
-              onPress={() => {
-                setTimeout(() => {
-                  setCounter(counter + 1);
-                }, 2000);
-
-                setBtnBackgroud(undefined);
-              }}
-            >
-              <Text
-                style={{ color: "#7895B2", fontSize: 15, fontWeight: "500" }}
-              >
-                Next
-              </Text>
-            </TouchableOpacity>
-          </View> */}
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -273,7 +264,7 @@ const styles = StyleSheet.create({
   container: {
     height: "100%",
     flex: 1,
-    backgroundColor: "#7895B2",
+    backgroundColor: "#AEBDCA",
   },
 
   topView: {
@@ -291,7 +282,7 @@ const styles = StyleSheet.create({
   button: {
     width: 310,
     borderWidth: 1,
-    borderColor: "white",
+
     borderRadius: 5,
     paddingVertical: 15,
     paddingLeft: 20,
@@ -299,6 +290,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontWeight: "550",
-    fontSize: 20,
+    fontSize: 17,
+    fontFamily: "Poppins-SemiBold",
+    color: "#7895B2",
   },
 });

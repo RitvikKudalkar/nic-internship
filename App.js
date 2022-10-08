@@ -6,14 +6,39 @@ import Login from "./screens/Login";
 import Register from "./screens/Register";
 import Quiz from "./screens/Quiz";
 import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
 import { useEffect, useCallback } from "react";
+import * as SplashScreen from "expo-splash-screen";
 
 const Stack = createStackNavigator();
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    "Poppins-Black": require("./assets/fonts/Poppins-Black.ttf"),
+    "Poppins-Regular": require("./assets/fonts/Poppins-Regular.ttf"),
+    "Poppins-Bold": require("./assets/fonts/Poppins-Bold.ttf"),
+    "Poppins-ExtraBold": require("./assets/fonts/Poppins-ExtraBold.ttf"),
+    "Poppins-Light": require("./assets/fonts/Poppins-Light.ttf"),
+    "Poppins-SemiBold": require("./assets/fonts/Poppins-SemiBold.ttf"),
+  });
+
+  useEffect(() => {
+    async function prepare() {
+      await SplashScreen.preventAutoHideAsync();
+    }
+  }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <NavigationContainer>
+    <NavigationContainer onLayout={onLayoutRootView}>
       <Stack.Navigator>
         <Stack.Screen
           name="Login"

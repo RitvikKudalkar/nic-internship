@@ -38,11 +38,12 @@ const Login = ({ navigation }) => {
         <View style={{ padding: 0 }}>
           <Text
             style={{
-              fontSize: 28,
+              fontSize: 24,
               marginLeft: 65,
               marginTop: 40,
               fontWeight: "600",
               color: "#7895B2",
+              fontFamily: "Poppins-Bold",
             }}
           >
             Welcome Back
@@ -51,6 +52,7 @@ const Login = ({ navigation }) => {
             style={{
               marginLeft: 65,
               marginTop: 3,
+              fontFamily: "Poppins-Regular",
             }}
           >
             Good to see you back!
@@ -148,6 +150,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: "bold",
     textTransform: "uppercase",
+    fontFamily: "Poppins-Bold",
   },
   bottomView: {
     backgroundColor: "#fff",
